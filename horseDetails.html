@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Horse Management">
+  <meta name="author" content="Anthime BAYANI">
+  <title>Horse Management</title>
+
+  <script src="./node_modules/knockout/build/output/knockout-latest.js"></script>
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="./dist/models/horse.js"></script>
+  <script src="./dist/viewmodels/horseDetailsViewModel.js"></script>
+
+  <link href="./node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
+  <link href="./dist/css/style.css" rel="stylesheet">
+
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      // Activates knockout.js
+      ko.applyBindings(new HorseManagement.HorseDetailsViewModel());
+    });
+
+  </script>
+</head>
+<body>
+  <div class="card mb-4" style="max-width: 100%;">
+    <div class="row g-0">
+      <div class="col-md-3">
+
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">
+            <!-- ko if: isEditMode -->
+            <label class="form-label">Photo</label>
+            <input type="text" class="form-control" data-bind="if: isEditMode, textInput: horse().pictureLink">
+            <!-- /ko -->
+            <!-- ko ifnot: isEditMode -->
+            <img  class="img-fluid rounded-start" data-bind="if: !isEditMode, attr: { src: horse().pictureLink }" alt="">
+            <!-- /ko -->
+          </p>
+
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" data-bind="textInput: horse().name, enable: isEditMode">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" rows="3" data-bind="textInput: horse().description, enable: isEditMode"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Age</label>
+            <input type="number" class="form-control" data-bind="textInput: horse().age, enable: isEditMode">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Weight</label>
+            <input type="number" class="form-control" data-bind="textInput: horse().weight, enable: isEditMode" >
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">NumbersOfPodiums</label>
+            <input type="number" class="form-control" data-bind="textInput: horse().numbersOfPodiums, enable: isEditMode">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">CoatColor</label>
+            <input type="text" class="form-control" data-bind="textInput: horse().coatColor, enable: isEditMode" >
+          </div>
+
+          <div class="mb-3">
+            <!-- ko ifnot: isEditMode  -->
+            <button type="button" class="btn btn-primary" data-bind="click: edit, visible: horse().rowid != undefined"> EDIT </button>
+            <button type="button" class="btn btn-danger" data-bind="click: delete, visible: horse().rowid != undefined"> DELETE </button>
+            <!-- /ko -->
+            <!-- ko if: isEditMode && horse().rowid == undefined -->
+            <button type="button" class="btn btn-primary" data-bind="click: save"> CREATE </button>
+           <!-- /ko -->
+            <!-- ko if: isEditMode && horse().rowid != undefined -->
+            <button type="button" class="btn btn-primary" data-bind="click: save, visible: isEditMode"> SAVE CHANGES </button>
+            <!-- /ko -->
+            <button type="button" class="btn btn-primary" data-bind="click: cancel, visible: isEditMode && horse().rowid != undefined"> CANCEL  </button>
+            <a type="button" class="btn btn-sm btn-outline-secondary" data-bind="attr: { href: '/' }, visible: !isEditMode() && horse().rowid != undefined">RETURN TO COLLECTION</a> 
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
