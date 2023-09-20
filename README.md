@@ -14,7 +14,7 @@ comprendre comment j’allais utiliser la technologie en question.
 Ensuite, je devais développer chaque partie de l’application en démarrant par la modélisation 
 de la base de données pour aboutir à la présentation graphique. 
 A l’issue de chaque journée, mon responsable parcourait l’avancement des développements. 
-# Boostrap 
+# Bootstrap 
 Pour mener à bien cette mission j’ai du tout d’abord apprendre le framework Bootstrap. 
 Présentons dans un premier temps la technologie. 
 Bootstrap est un framework HTML/CSS développé par Twitter et qui permet de réaliser des 
